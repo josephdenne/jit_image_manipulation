@@ -3,8 +3,8 @@
 "Just in time" image manipulation for Symphony.
 It is part of the Symphony core download package.
 
-- Version: 1.09
-- Date: 4th May 2010
+- Version: 1.10
+- Date: 26th October 2010
 - Requirements: Symphony 2.0.5 or later
 - Author: Alistair Kearney, alistair@symphony-cms.com
 - Constributors: [A list of contributors can be found in the commit history](http://github.com/pointybeard/jit_image_manipulation/commits/master)
@@ -34,23 +34,29 @@ It is not absolutely necessary to do this, but may prevent problems with future 
 
 The image manipulation is controlled via the URL, e. g.:
 
-	<img src="{$root}/image/2/80/80/5{image/@path}/{image/filename}" />
+	<img src="{$root}/image/2/80/80/0/5{image/@path}/{image/filename}" />
 
-The extension accepts four nummeric settings for the manipulation:
+The extension accepts four nummeric settings and one hex setting for image manipulation:
 
 1. mode
 2. width
 3. height
-4. reference position (for cropping only)
+4. rotation
+5. reference position (for cropping only)
+6. color (for background filling with rotational images and cropped images only)
 
-There are four possible modes:
+There are seven possible modes:
 
 - `0` none
 - `1` resize
-- `2` resize and crop (used in the example)
+- `2` resize and crop
 - `3` crop
+- `4` crop and rotate
+- `5` resize and rotate
+- `6` resize, crop and rotate (used in the example)
+- `7` rotate
 
-If you're using mode `2` or `3` for image cropping you need to specify the reference position:
+If you're using mode `2`, `4`, '5' or '6' for image cropping you need to specify the reference position:
 
 	+---+---+---+
 	| 1 | 2 | 3 |
@@ -60,11 +66,23 @@ If you're using mode `2` or `3` for image cropping you need to specify the refer
 	| 7 | 8 | 9 |
 	+---+---+---+
 
+If you're using mode `4`, `5` `6` or `7` for image rotation you need to specify a rotational angle, specified clockwise or ani-clockwise in degrees. For exmaple:
+
+	0 = 0º
+	90 = rotated 90º clockwise
+	-90 = rotated 90º anti-clockwise
+
+You also need to specify a background hex color value (supports CSS-style short hex strings [ff2233 == f23]).
+
 ### Trusted Sites
 
 In order pull images from external sources, you must set up a white-list of trusted sites. To do this, goto "System > Preferences" and add rules to the "JIT Image Manipulation" rules textarea. To match anything use a single asterisk (*).
 
 ## Change Log
+
+**Version 1.10**
+
+- Added image rotation modes (Joseph Denne [josephdenne.com])
 
 **Version 1.09**
 
@@ -109,4 +127,3 @@ In order pull images from external sources, you must set up a white-list of trus
 
 - Updated to work with 2.0.2 config changes
 	
-

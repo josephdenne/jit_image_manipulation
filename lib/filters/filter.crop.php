@@ -1,7 +1,7 @@
 <?php
-	
+
 	require_once(realpath(dirname(__FILE__).'/../') . '/class.imagefilter.php');
-	
+
 	Class FilterCrop extends ImageFilter{
 
 		const TOP_LEFT = 1;
@@ -13,7 +13,7 @@
 		const BOTTOM_LEFT = 7;
 		const BOTTOM_MIDDLE = 8;
 		const BOTTOM_RIGHT = 9;
-	
+
 		public static function run($res, $width, $height, $anchor=self::TOP_LEFT, $background_fill='fff'){
 
 			$dst_w = Image::width($res);
@@ -22,7 +22,7 @@
 			if(!empty($width) && !empty($height)) {
 				$dst_w = $width;
 				$dst_h = $height;
-			} 
+			}
 
 			elseif(empty($height)) {
 				$ratio = ($dst_h / $dst_w);
@@ -43,9 +43,9 @@
 			list($src_x, $src_y, $dst_x, $dst_y) = self::__calculateDestSrcXY($dst_w, $dst_h, Image::width($res), Image::height($res), Image::width($res), Image::height($res), $anchor);
 
 			imagecopyresampled($tmp, $res, $src_x, $src_y, $dst_x, $dst_y, Image::width($res), Image::height($res), Image::width($res), Image::height($res));
-			
+
 			@imagedestroy($res);
-			
+
 			return $tmp;
 
 //			self::__copy($tmp, $res, true);
@@ -81,7 +81,7 @@
 			}
 
 			else{
-	
+
 				$my = array(				
 					0,
 					ceil(($height * 0.5) - ($src_h * 0.5)),
@@ -90,27 +90,27 @@
 			}
 
 			switch($position){
-		
+
 				case 1:
 					break;
-								
+
 				case 2:		
 					$src_x = 1;
 					break;
-		
+
 				case 3:
 					$src_x = 2; 
 					break;
-		
+
 				case 4:
 					$src_y = 1;
 					break;
-							
+
 				case 5:
 					$src_x = 1;
 					$src_y = 1;
 					break;
-		
+
 				case 6:
 					$src_x = 2;
 					$src_y = 1;
@@ -119,17 +119,17 @@
 				case 7:
 					$src_y = 2;
 					break;
-		
+
 				case 8:
 					$src_x = 1;
 					$src_y = 2;
 					break;	
-															
+
 				case 9:
 					$src_x = 2;
 					$src_y = 2;
 					break;
-						
+
 			}
 
 			$a = ($width >= $dst_w ? $mx[$src_x] : 0);

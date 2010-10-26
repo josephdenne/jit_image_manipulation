@@ -21,7 +21,7 @@
 			} 
 
 			elseif(empty($width)) {
-		
+
 				$ratio = ($dst_w / $dst_h);
 				$dst_h = $height;
 				$dst_w = round($dst_h * $ratio);
@@ -29,24 +29,24 @@
 			}
 
 			$dst = imagecreatetruecolor($dst_w, $dst_h);
-			
+
 			/* making the new image transparent */
             $background = imagecolorallocate($dst, 0, 0, 0);
             ImageColorTransparent($dst, $background); // make the new temp image all transparent			
 			imagealphablending($dst, false);
 			imagesavealpha($dst, true);
-			
+
 			if(function_exists('imageAntiAlias')){
 				imageAntiAlias($dst, true);
 			}
-			
+
 			self::__fill($dst);
 
 			imagecopyresampled($dst, $res, 0, 0, 0, 0, $dst_w, $dst_h, Image::width($res), Image::height($res));
-			
+
 			@imagedestroy($res);
-			
+
 			return $dst;
-			
+
 		}
 	}

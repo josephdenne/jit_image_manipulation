@@ -152,13 +152,13 @@
 		}
 		
 		public function applyFilter($filter, array $args = array()){
-			
+
 			include_once("filters/filter.{$filter}.php");
-			
+
 			array_unshift($args, $this->_resource);
-			
+
 			$this->_resource = call_user_func_array(array(sprintf('Filter%s', ucfirst($filter)), 'run'), $args);
-			
+
 			return true;
 		}
 		
@@ -180,23 +180,22 @@
 		
 			return self::__render($dest, $quality, $output, $interlacing);
 		}
-	
+
 		public static function renderOutputHeaders($output, $dest=NULL){
 
 			header('Content-Type: ' . image_type_to_mime_type($output));
 
 			if(!$dest) return;
-				
+
 			## Try to remove old extension
 			$ext = strrchr($dest, '.');
 			if($ext !== false){  	         
 				$dest = substr($dest, 0, -strlen($ext));  	     
 			}
-			
+
 			header('Expires: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 			header("Content-Disposition: inline; filename=$dest" . image_type_to_extension($output));
 		    header('Pragma: no-cache');			
 
 		}
-	}	
-
+	}
