@@ -72,7 +72,7 @@ If you're using mode `4`, `5` `6` or `7` for image rotation you need to specify 
 	90 = rotated 90º clockwise
 	-90 = rotated 90º anti-clockwise
 
-You also need to specify a background hex color value (supports CSS-style short hex strings [ff2233 == f23]).
+You also need to specify a background hex color value (supports CSS-style short hex strings [ff2233 == f23]). This is used as a compelte fill for JPGs and as a keyline for PNGs and GIFs, which are otherwise transparent.
 
 ### Trusted Sites
 
